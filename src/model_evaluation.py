@@ -62,14 +62,14 @@ def evaluate_model(clf, X_test: np.ndarray, y_test: np.ndarray) -> dict:
         y_pred = clf.predict(X_test)
         # Evaluation Metrics
         r2 = r2_score(y_test, y_pred)
-        rmse = mean_squared_error(y_test, y_pred)
+        mse = mean_squared_error(y_test, y_pred)
         mae = metrics.mean_absolute_error(y_test,y_pred)
         
         # Adjusted R2
         adj_r2 = 1 - ((1-metrics.r2_score(y_test, y_pred))*(len(y_test)-1)/(len(y_test)-X_test.shape[1]-1))
         metrics_dict = {
             'R2': r2,
-            'RMSE': rmse,
+            'MSE': mse,
             'MAE': mae,
            }
         logger.debug('Model evaluation metrics calculated')
