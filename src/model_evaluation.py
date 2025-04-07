@@ -3,11 +3,14 @@ import numpy as np
 import pandas as pd
 import pickle
 import json
-from sklearn.metrics import mean_squared_error, r2_score
+from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_error
 from sklearn.model_selection import cross_val_score
 from sklearn import metrics
 import logging
 from sklearn.model_selection import train_test_split
+from dvclive import live
+
+
 log_dir = 'logs'
 os.makedirs(log_dir, exist_ok=True)
 
@@ -63,7 +66,7 @@ def evaluate_model(clf, X_test: np.ndarray, y_test: np.ndarray) -> dict:
         # Evaluation Metrics
         r2 = r2_score(y_test, y_pred)
         mse = mean_squared_error(y_test, y_pred)
-        mae = metrics.mean_absolute_error(y_test,y_pred)
+        mae = mean_absolute_error(y_test,y_pred)
         
         # Adjusted R2
         adj_r2 = 1 - ((1-metrics.r2_score(y_test, y_pred))*(len(y_test)-1)/(len(y_test)-X_test.shape[1]-1))
@@ -100,7 +103,12 @@ def main():
         X_train,X_test,y_train,y_test = train_test_split(X,y,test_size=0.2,random_state=42)
 
         metrics = evaluate_model(clf, X_test, y_test)
+        with Live(save_dvc_exp=True) as live:
+            live.log_metric('R2', r2_score(y_test, y_test))
+            live.log_metric('MSE', mean_squared_error(y_test, y_pred))
+            live.log_metric('MAE', mean_absolute_error(y_test,y_pred))
 
+        live.log_params(params)
        
         save_metrics(metrics, 'reports/metrics.json')
     except Exception as e:
