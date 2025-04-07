@@ -21,11 +21,11 @@ stages:
     - data/processed_data
     - src/model_building.py
 
-    # params:
-    # - model_building.n_estimators
-    # - model_building.max_depth
-    # - model_building.learning_rate
-    # - model_building.random_state
+    params:
+    - model_building.n_estimators
+    - model_building.max_depth
+    - model_building.learning_rate
+    - model_building.random_state
     outs:
     - model/model.pkl
 
