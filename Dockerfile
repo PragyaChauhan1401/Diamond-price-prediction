@@ -25,4 +25,4 @@ COPY . .
 EXPOSE 8501
 
 # Run the Streamlit app with full path
-ENTRYPOINT ["python", "-m", "streamlit", "run", "Streamlit-app/app.py"]
+ENTRYPOINT ["python", "-m", "streamlit", "run", "app.py"]
