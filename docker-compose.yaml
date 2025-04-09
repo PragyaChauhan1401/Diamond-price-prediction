@@ -1,0 +1,14 @@
+
+services:
+    diamond-app:
+        image: diamond-app
+        container_name: tender_ishizaka
+        build:
+            context: .
+            dockerfile: Dockerfile
+            
+        ports:
+         - "8501:8501"
+        restart: unless-stopped
+
+  

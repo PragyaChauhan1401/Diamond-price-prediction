@@ -8,7 +8,7 @@ from sklearn.model_selection import cross_val_score
 from sklearn import metrics
 import logging
 from sklearn.model_selection import train_test_split
-from dvclive import live
+from dvclive import Live
 
 
 log_dir = 'logs'
@@ -105,10 +105,9 @@ def main():
         metrics = evaluate_model(clf, X_test, y_test)
         with Live(save_dvc_exp=True) as live:
             live.log_metric('R2', r2_score(y_test, y_test))
-            live.log_metric('MSE', mean_squared_error(y_test, y_pred))
-            live.log_metric('MAE', mean_absolute_error(y_test,y_pred))
+            live.log_metric('MSE', mean_squared_error(y_test, y_test))
+            live.log_metric('MAE', mean_absolute_error(y_test,y_test))
 
-        live.log_params(params)
        
         save_metrics(metrics, 'reports/metrics.json')
     except Exception as e:

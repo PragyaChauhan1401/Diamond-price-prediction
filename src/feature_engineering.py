@@ -3,6 +3,7 @@ import logging
 import pandas as pd 
 from sklearn.preprocessing import LabelEncoder
 from sklearn.preprocessing import StandardScaler
+import pickle
 
 
 log_dir = 'logs'
@@ -31,9 +32,11 @@ def encode_data(df):
         s = (df.dtypes =="object")
         object_cols = list(s[s].index)
 
-        lb = LabelEncoder()
+        label_encoders = {}
         for col in object_cols:
-            df[col] = lb.fit_transform(df[col])
+            le = LabelEncoder()
+            df[col] = le.fit_transform(df[col])
+            label_encoders[col] = le
 
         logger.debug('Encoding done successfully')
 
@@ -42,6 +45,17 @@ def encode_data(df):
         scaler  = StandardScaler()
         df[numerical_cols] = scaler.fit_transform(df[numerical_cols])
         logger.debug('sucessfully scaled the numerical cols')
+
+        os.makedirs('model', exist_ok=True)
+
+        with open('./model/label_encoders.pkl', 'wb') as f:
+            pickle.dump(label_encoders, f)
+
+        with open('./model/scaler.pkl', 'wb') as f:
+            pickle.dump(scaler, f)
+
+        logger.debug('Encoders and scaler saved successfully')
+
         return df
     except KeyError as e:
         logger.error('Column not found %s',e)

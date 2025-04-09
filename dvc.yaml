@@ -4,7 +4,7 @@ stages:
     deps:
     - data/raw/diamonds.csv
     - src/data_preprocessing.py
-    outs: 
+    outs:
     - data/interim
 
   feature_engineering:
@@ -14,7 +14,7 @@ stages:
     - src/feature_engineering.py
     outs:
     - data/processed_data
-  
+
   model_building:
     cmd: python src/model_building.py
     deps:
@@ -36,6 +36,10 @@ stages:
     - src/model_evaluation.py
     metrics:
     - reports/metrics.json
-    
-        
-  
+
+
+metrics:
+- dvclive/metrics.json
+plots:
+- dvclive/plots/metrics:
+    x: step
