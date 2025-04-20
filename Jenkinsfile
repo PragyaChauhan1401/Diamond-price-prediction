@@ -39,8 +39,8 @@ pipeline {
         stage('Run Docker Container') {
             steps {
                 bat '''
-                    docker rm -f ${CONTAINER_NAME} || true
-                    docker run -d -p 80:80 --name ${CONTAINER_NAME} ${FULL_IMAGE_NAME}
+                    docker rm -f %CONTAINER_NAME% || true
+                    docker run -d -p 80:80 --name %CONTAINER_NAME% %FULL_IMAGE_NAME%
                 '''
             }
         }
