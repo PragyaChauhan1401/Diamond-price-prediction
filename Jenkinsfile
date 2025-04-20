@@ -48,10 +48,10 @@ pipeline {
 
     post {
         success {
-            echo '🎉 CI/CD pipeline executed successfully!'
+            echo 'CI/CD pipeline executed successfully!'
         }
         failure {
-            echo '🚨 CI/CD pipeline failed. Please check the logs!'
+            echo 'CI/CD pipeline failed. Please check the logs!'
         }
     }
 }
