@@ -13,7 +13,7 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git 'https://github.com/PragyaChauhan1401/Diamond-price-prediction.git' // Replace with your repo
+                git branch:'main', url:'https://github.com/PragyaChauhan1401/Diamond-price-prediction.git' // Replace with your repo
             }
         }
 
