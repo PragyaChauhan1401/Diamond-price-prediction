@@ -70,7 +70,7 @@ Local Deployment: Use Docker to deploy locally.
 Production Deployment: https://diamond-price-prediction-ek10.onrender.com/
 
 
-10. Contact Information
+9. Contact Information
 
 Maintained by: Pragya Chauhan  
 GitHub: [https://github.com/PragyaChauhan1401]
