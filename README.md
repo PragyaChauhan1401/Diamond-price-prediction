@@ -1,4 +1,4 @@
-Diamond Price Prediction with MLOps & DevOps
+**Diamond Price Prediction with MLOps & DevOps**
 1. Project Title and Description
 Description:
 This project builds a complete machine learning pipeline for diamond price prediction. It features an automated, scalable, and containerized workflow with CI/CD integration. Using MLOps best practices, it ensures reproducibility, version control, and seamless deployment with Docker and Jenkins.
